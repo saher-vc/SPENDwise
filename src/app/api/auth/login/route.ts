@@ -1,10 +1,7 @@
 export const dynamic = 'force-dynamic'
 
-import { prisma } from '@/lib/prisma'
-import { setSession } from '@/lib/session'
-import { validateEmail } from '@/lib/validation'
 import { NextResponse } from 'next/server'
-import bcrypt from 'bcryptjs'
+import { validateEmail } from '@/lib/validation'
 
 export async function POST(req: Request) {
   try {
@@ -12,21 +9,24 @@ export async function POST(req: Request) {
 
     const emailError = validateEmail(email)
     if (emailError) return NextResponse.json({ error: emailError }, { status: 400 })
-
     if (!password) return NextResponse.json({ error: 'Password is required' }, { status: 400 })
 
-    const user = await prisma.user.findUnique({ where: { email: email.toLowerCase().trim() } })
+    const { prisma } = await import('@/lib/prisma')
+    const user = await prisma.user.findUnique({
+      where: { email: email.toLowerCase().trim() }
+    })
 
-    // Generic error to avoid leaking which emails exist
     if (!user) {
       return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 })
     }
 
+    const bcrypt = await import('bcryptjs')
     const valid = await bcrypt.compare(password, user.password)
     if (!valid) {
       return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 })
     }
 
+    const { setSession } = await import('@/lib/session')
     await setSession(user.id)
 
     return NextResponse.json({
