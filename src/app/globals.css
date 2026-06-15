@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #006a61;
+}
+.bg-primary { background-color: var(--color-primary) !important; }
+.text-primary { color: var(--color-primary) !important; }
+.border-primary { border-color: var(--color-primary) !important; }
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #c9c9c9;
+  color: #161d1c;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#app-shell {
+  background-color: #f4fbf8;
+  width: 430px;
+  min-width: 430px;
+  max-width: 430px;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  box-shadow: 0 0 60px rgba(0,0,0,0.25);
+}
+
+.material-symbols-outlined {
+  font-family: 'Material Symbols Outlined';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.dark body {
+  background-color: #1a1a1a;
+}
+.dark #app-shell {
+  background-color: #161d1c;
+  color: #e0e0e0;
+}
+.dark .bg-white {
+  background-color: #232b2a !important;
+  color: #e0e0e0;
+}
+.dark .text-on-surface {
+  color: #e0e0e0 !important;
+}
+.dark .border-outline-variant\/30 {
+  border-color: rgba(255,255,255,0.1) !important;
+}
+:root {
+  --color-primary: #006a61;
+}
+.bg-primary { background-color: var(--color-primary) !important; }
+.text-primary { color: var(--color-primary) !important; }
+.border-primary { border-color: var(--color-primary) !important; }

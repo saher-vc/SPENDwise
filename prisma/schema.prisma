@@ -1,0 +1,118 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id          String    @id @default(cuid())
+  email       String    @unique
+  name        String
+  password    String
+  budget      Float     @default(50000)
+  savingsGoal Float     @default(25000)
+  goalName    String    @default("My Goal")
+  persona     String    @default("student")
+  currency    String    @default("PKR")
+  onboarded   Boolean   @default(false)
+  points      Int       @default(0)
+  expenses    Expense[]
+  moods       Mood[]
+  sentRequests        Friendship[]         @relation("SentRequests")
+  receivedRequests    Friendship[]         @relation("ReceivedRequests")
+  createdSplits       Split[]              @relation("CreatedSplits")
+  splitParticipations SplitParticipant[]
+  challenges          UserChallenge[]
+  badges              UserBadge[]
+  createdAt   DateTime  @default(now())
+}
+
+model Expense {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  amount      Float
+  description String
+  category    String
+  date        DateTime @default(now())
+}
+
+model Mood {
+  id     String   @id @default(cuid())
+  userId String
+  user   User     @relation(fields: [userId], references: [id])
+  emoji  String
+  date   DateTime @default(now())
+}
+model Friendship {
+  id         String   @id @default(cuid())
+  senderId   String
+  receiverId String
+  status     String   @default("pending") // pending, accepted, rejected
+  createdAt  DateTime @default(now())
+  sender     User     @relation("SentRequests", fields: [senderId], references: [id])
+  receiver   User     @relation("ReceivedRequests", fields: [receiverId], references: [id])
+}
+
+model Split {
+  id           String             @id @default(cuid())
+  title        String
+  totalAmount  Float
+  createdById  String
+  createdBy    User               @relation("CreatedSplits", fields: [createdById], references: [id])
+  participants SplitParticipant[]
+  createdAt    DateTime           @default(now())
+}
+
+model SplitParticipant {
+  id       String  @id @default(cuid())
+  splitId  String
+  userId   String
+  amount   Float
+  paid     Boolean @default(false)
+  split    Split   @relation(fields: [splitId], references: [id])
+  user     User    @relation(fields: [userId], references: [id])
+}
+
+model Challenge {
+  id          String          @id @default(cuid())
+  title       String
+  description String
+  points      Int
+  type        String          // streak, single, weekly
+  target      Int             @default(1)
+  users       UserChallenge[]
+}
+
+model UserChallenge {
+  id          String    @id @default(cuid())
+  userId      String
+  challengeId String
+  progress    Int       @default(0)
+  completed   Boolean   @default(false)
+  joinedAt    DateTime  @default(now())
+  user        User      @relation(fields: [userId], references: [id])
+  challenge   Challenge @relation(fields: [challengeId], references: [id])
+}
+
+model Badge {
+  id          String      @id @default(cuid())
+  name        String
+  emoji       String
+  description String
+  condition   String      // e.g. "complete_challenge", "streak_5", "first_expense"
+  users       UserBadge[]
+}
+
+model UserBadge {
+  id        String   @id @default(cuid())
+  userId    String
+  badgeId   String
+  earnedAt  DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  badge     Badge    @relation(fields: [badgeId], references: [id])
+}

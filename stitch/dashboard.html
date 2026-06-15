@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SpendWise Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#008080", // Electric Teal
+                        "on-primary": "#ffffff",
+                        "primary-container": "#ccf2f2",
+                        "on-primary-container": "#002020",
+                        surface: "#fcfdfd",
+                        "on-surface": "#191c1c",
+                        "surface-variant": "#dae4e4",
+                        "on-surface-variant": "#3f4948",
+                        outline: "#6f7979",
+                        "outline-variant": "#bec8c8",
+                        background: "#fcfdfd",
+                        "on-background": "#191c1c",
+                        error: "#ba1a1a",
+                        coral: "#ff7f50",
+                        mint: "#98ff98"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.25rem",
+                        "3xl": "2rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        headline: ["Public Sans", "sans-serif"],
+                        display: ["Public Sans", "sans-serif"],
+                        body: ["Public Sans", "sans-serif"],
+                        label: ["Public Sans", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface antialiased pb-32">
+<!-- Top App Bar -->
+<header class="bg-surface dark:bg-background sticky top-0 z-40">
+<div class="flex justify-between items-center px-6 py-4 w-full w-full
+
+">
+<div class="flex flex-col">
+<h1 class="font-headline font-bold text-2xl text-primary tracking-tight">👋 heyyy Alex</h1>
+<span class="text-on-surface-variant text-sm font-medium">📆 June 2025</span>
+</div>
+<div class="flex gap-3">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-variant transition-colors active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">forum</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-variant transition-colors active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+</button>
+</div>
+</div>
+</header>
+<main class="w-full
+
+ px-6 space-y-6 mt-2">
+<!-- Hero Card (Bento Style) -->
+<section class="relative overflow-hidden rounded-3xl bg-primary p-8 text-on-primary shadow-xl shadow-primary/10">
+<div class="relative z-10 flex flex-col gap-6">
+<div>
+<h2 class="text-sm font-bold tracking-widest uppercase opacity-80">💰 LEFT TO SPEND</h2>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="text-5xl font-extrabold tracking-tighter">$450</span>
+<span class="text-xl opacity-70">/ $1,500</span>
+</div>
+</div>
+<div class="space-y-2">
+<div class="h-4 w-full bg-white/20 rounded-full overflow-hidden">
+<div class="h-full bg-white rounded-full transition-all duration-1000 ease-out" style="width: 70%"></div>
+</div>
+<p class="text-sm font-medium opacity-90 italic">out of $1,500 budget · 70% used</p>
+</div>
+</div>
+<!-- Decorative circle -->
+<div class="absolute -right-12 -top-12 w-48 h-48 bg-white/10 rounded-full blur-2xl"></div>
+</section>
+<!-- Fun Fact Bar -->
+<div class="flex items-center gap-3 bg-yellow-50 border border-yellow-100 rounded-full py-3 px-6 shadow-sm">
+<span class="text-xl">✨</span>
+<p class="text-sm font-semibold text-yellow-800">You saved enough for 2 pizzas this week!</p>
+</div>
+<!-- Daily Expense Progress Scroll -->
+<section class="space-y-3">
+<h3 class="font-bold text-lg px-1">Weekly Momentum</h3>
+<div class="flex gap-4 overflow-x-auto pb-4 hide-scrollbar snap-x">
+<!-- Days before -->
+<div class="flex-shrink-0 w-12 h-12 rounded-xl bg-surface-variant/40 flex flex-col items-center justify-center snap-start">
+<span class="text-[10px] font-bold text-outline uppercase">Mon</span>
+<div class="w-2 h-2 rounded-full bg-green-500 mt-1"></div>
+</div>
+<div class="flex-shrink-0 w-12 h-12 rounded-xl bg-surface-variant/40 flex flex-col items-center justify-center snap-start">
+<span class="text-[10px] font-bold text-outline uppercase">Tue</span>
+<div class="w-2 h-2 rounded-full bg-red-400 mt-1"></div>
+</div>
+<div class="flex-shrink-0 w-12 h-12 rounded-xl bg-surface-variant/40 flex flex-col items-center justify-center snap-start">
+<span class="text-[10px] font-bold text-outline uppercase">Wed</span>
+<div class="w-2 h-2 rounded-full bg-green-500 mt-1"></div>
+</div>
+<div class="flex-shrink-0 w-12 h-12 rounded-xl bg-surface-variant/40 flex flex-col items-center justify-center snap-start">
+<span class="text-[10px] font-bold text-outline uppercase">Thu</span>
+<div class="w-2 h-2 rounded-full bg-outline-variant mt-1"></div>
+</div>
+<!-- Today -->
+<div class="flex-shrink-0 w-12 h-12 rounded-xl bg-primary-container border-2 border-primary flex flex-col items-center justify-center snap-start scale-110 shadow-lg shadow-primary/5">
+<span class="text-[10px] font-bold text-primary uppercase">Fri</span>
+<span class="material-symbols-outlined text-primary text-[14px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<div class="flex-shrink-0 w-12 h-12 rounded-xl bg-surface-variant/40 flex flex-col items-center justify-center snap-start">
+<span class="text-[10px] font-bold text-outline uppercase">Sat</span>
+</div>
+<div class="flex-shrink-0 w-12 h-12 rounded-xl bg-surface-variant/40 flex flex-col items-center justify-center snap-start">
+<span class="text-[10px] font-bold text-outline uppercase">Sun</span>
+</div>
+</div>
+</section>
+<!-- Money Mood Check-in -->
+<section class="bg-surface-variant/30 rounded-3xl p-6 border border-surface-variant">
+<h3 class="font-bold text-lg mb-4">How did spending make you feel today? 😊😢</h3>
+<div class="flex justify-between gap-2">
+<button class="group flex flex-col items-center gap-2 p-2 rounded-2xl hover:bg-white transition-all active:scale-90">
+<span class="text-3xl grayscale group-hover:grayscale-0 transition-all">😢</span>
+</button>
+<button class="group flex flex-col items-center gap-2 p-2 rounded-2xl hover:bg-white transition-all active:scale-90">
+<span class="text-3xl grayscale group-hover:grayscale-0 transition-all">🙂</span>
+</button>
+<button class="group flex flex-col items-center gap-2 p-2 rounded-2xl hover:bg-white transition-all active:scale-90">
+<span class="text-3xl grayscale group-hover:grayscale-0 transition-all">😊</span>
+</button>
+<button class="group flex flex-col items-center gap-2 p-2 rounded-2xl hover:bg-white transition-all active:scale-90">
+<span class="text-3xl grayscale group-hover:grayscale-0 transition-all">😁</span>
+</button>
+<button class="group flex flex-col items-center gap-2 p-2 rounded-2xl hover:bg-white transition-all active:scale-90">
+<span class="text-3xl grayscale group-hover:grayscale-0 transition-all">🎉</span>
+</button>
+</div>
+</section>
+<!-- Mini Cards Grid -->
+<section class="grid grid-cols-2 gap-4">
+<div class="bg-white p-5 rounded-3xl shadow-sm border border-surface-variant/50">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-primary">bar_chart</span>
+<span class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-0.5 rounded-full">✅ TRACK</span>
+</div>
+<h4 class="text-xs font-bold text-outline uppercase tracking-wider">Daily average</h4>
+<div class="flex items-center gap-1 mt-1">
+<span class="text-xl font-bold">$15.00</span>
+<span class="text-orange-500 text-sm">🔥</span>
+</div>
+</div>
+<div class="bg-white p-5 rounded-3xl shadow-sm border border-surface-variant/50">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-primary">target</span>
+<span class="text-primary text-[10px] font-bold">82%</span>
+</div>
+<h4 class="text-xs font-bold text-outline uppercase tracking-wider">Savings goal</h4>
+<div class="mt-1">
+<span class="text-xl font-bold">$750</span>
+<span class="text-xs text-outline"> / $900</span>
+</div>
+</div>
+</section>
+<!-- Top Categories Chips -->
+<section class="space-y-3">
+<h3 class="font-bold text-lg px-1">Top Categories</h3>
+<div class="flex flex-wrap gap-3">
+<button class="px-4 py-2 rounded-full border-2 border-coral bg-coral/5 flex items-center gap-2 font-semibold text-sm">
+<span class="material-symbols-outlined text-coral text-lg">restaurant</span> Food
+                </button>
+<button class="px-4 py-2 rounded-full border-2 border-mint bg-mint/5 flex items-center gap-2 font-semibold text-sm">
+<span class="material-symbols-outlined text-teal-600 text-lg">directions_car</span> Transport
+                </button>
+<button class="px-4 py-2 rounded-full border border-outline-variant hover:bg-surface-variant/20 transition-colors flex items-center gap-2 font-semibold text-sm">
+<span class="material-symbols-outlined text-outline text-lg">shopping_bag</span> Shopping
+                </button>
+<button class="px-4 py-2 rounded-full border border-outline-variant hover:bg-surface-variant/20 transition-colors flex items-center gap-2 font-semibold text-sm">
+<span class="material-symbols-outlined text-outline text-lg">movie</span> Entertainment
+                </button>
+</div>
+</section>
+<!-- Recent Transactions -->
+<section class="space-y-4">
+<div class="flex justify-between items-center px-1">
+<h3 class="font-bold text-lg">Recent Transactions</h3>
+<button class="text-primary font-bold text-sm">See all</button>
+</div>
+<div class="space-y-3">
+<!-- Coffee -->
+<div class="flex items-center justify-between p-4 bg-white rounded-2xl shadow-sm border border-surface-variant/30">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center">
+<span class="material-symbols-outlined text-orange-600">coffee</span>
+</div>
+<div>
+<p class="font-bold">Starbucks Coffee</p>
+<p class="text-xs text-outline">Today, 9:41 AM</p>
+</div>
+</div>
+<span class="font-bold text-on-surface">-$5.50</span>
+</div>
+<!-- Groceries -->
+<div class="flex items-center justify-between p-4 bg-white rounded-2xl shadow-sm border border-surface-variant/30">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-green-50 flex items-center justify-center">
+<span class="material-symbols-outlined text-green-600">shopping_cart</span>
+</div>
+<div>
+<p class="font-bold">Whole Foods</p>
+<p class="text-xs text-outline">Yesterday, 6:20 PM</p>
+</div>
+</div>
+<span class="font-bold text-on-surface">-$42.30</span>
+</div>
+<!-- Uber -->
+<div class="flex items-center justify-between p-4 bg-white rounded-2xl shadow-sm border border-surface-variant/30">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-gray-800">local_taxi</span>
+</div>
+<div>
+<p class="font-bold">Uber Trip</p>
+<p class="text-xs text-outline">Jun 12, 11:15 PM</p>
+</div>
+</div>
+<span class="font-bold text-on-surface">-$18.00</span>
+</div>
+<!-- Internet -->
+<div class="flex items-center justify-between p-4 bg-white rounded-2xl shadow-sm border border-surface-variant/30">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-600">wifi</span>
+</div>
+<div>
+<p class="font-bold">Monthly Internet</p>
+<p class="text-xs text-outline">Jun 10, 10:00 AM</p>
+</div>
+</div>
+<span class="font-bold text-on-surface">-$85.00</span>
+</div>
+</div>
+</section>
+</main>
+<!-- FAB -->
+<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary text-on-primary rounded-2xl shadow-xl shadow-primary/30 flex items-center justify-center active:scale-90 transition-transform z-50">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'wght' 600;">add</span>
+</button>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container dark:bg-surface-dim shadow-[0px_-4px_20px_rgba(0,0,0,0.04)] rounded-t-xl">
+<button class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-full px-4 py-1 transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-[10px] font-bold mt-0.5">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-full px-4 py-1">
+<span class="material-symbols-outlined">trophy</span>
+<span class="text-[10px] font-medium mt-0.5">Challenges</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-full px-4 py-1">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-medium mt-0.5">Friends</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-full px-4 py-1">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-[10px] font-medium mt-0.5">Analytics</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors rounded-full px-4 py-1">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-[10px] font-medium mt-0.5">Settings</span>
+</button>
+</nav>
+<script>
+        // Micro-interactions for mood check-in
+        document.querySelectorAll('.group button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const span = btn.querySelector('span');
+                span.classList.toggle('grayscale');
+                span.classList.toggle('scale-125');
+                setTimeout(() => {
+                    span.classList.remove('scale-125');
+                }, 300);
+            });
+        });
+    </script>
+</body></html>

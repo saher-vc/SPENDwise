@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SpendWise Intro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error": "#ffffff",
+                    "surface-container-low": "#eef5f3",
+                    "on-surface": "#161d1c",
+                    "secondary-fixed-dim": "#ffb3b0",
+                    "on-tertiary": "#ffffff",
+                    "primary-container": "#00c4b4",
+                    "tertiary-container": "#00c694",
+                    "on-tertiary-fixed-variant": "#00513b",
+                    "on-primary-fixed": "#00201d",
+                    "on-primary-container": "#004b44",
+                    "inverse-primary": "#3edccc",
+                    "surface": "#f4fbf8",
+                    "on-tertiary-container": "#004c37",
+                    "outline": "#6b7a77",
+                    "on-secondary-container": "#6d0010",
+                    "background": "#f4fbf8",
+                    "on-secondary-fixed-variant": "#8c1520",
+                    "surface-container": "#e8efed",
+                    "primary-fixed-dim": "#3edccc",
+                    "tertiary-fixed-dim": "#2fe0aa",
+                    "primary-fixed": "#63f9e8",
+                    "secondary": "#ae2f34",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#ff6b6b",
+                    "on-secondary-fixed": "#410006",
+                    "error-container": "#ffdad6",
+                    "surface-bright": "#f4fbf8",
+                    "surface-dim": "#d4dcd9",
+                    "inverse-on-surface": "#ebf2f0",
+                    "surface-container-highest": "#dde4e1",
+                    "on-background": "#161d1c",
+                    "surface-variant": "#dde4e1",
+                    "on-primary-fixed-variant": "#005049",
+                    "on-primary": "#ffffff",
+                    "primary": "#006a61",
+                    "outline-variant": "#bacac6",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#006a61",
+                    "on-surface-variant": "#3c4a47",
+                    "inverse-surface": "#2b3230",
+                    "secondary-fixed": "#ffdad8",
+                    "tertiary-fixed": "#59fdc5",
+                    "surface-container-high": "#e3eae7",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed": "#002116",
+                    "tertiary": "#006c4f"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sm": "16px",
+                    "xs": "8px",
+                    "gutter": "16px",
+                    "container-margin": "20px",
+                    "xl": "48px",
+                    "md": "24px",
+                    "lg": "32px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .carousel-container {
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+        }
+        .carousel-container::-webkit-scrollbar {
+            display: none;
+        }
+        .carousel-slide {
+            scroll-snap-align: center;
+        }
+        .active-dot {
+            width: 24px !important;
+            background-color: #006a61 !important;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-container-lowest text-on-background font-body-md selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation Anchor (Non-interactive/Branding) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin py-xs w-full w-full
+
+ bg-surface-container-lowest">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">SpendWise</h1>
+<div class="flex items-center gap-2">
+<span class="text-on-surface-variant font-label-md">EN</span>
+<span class="material-symbols-outlined text-on-surface-variant" style="font-variation-settings: 'FILL' 0;">language</span>
+</div>
+</header>
+<main class="min-h-screen flex flex-col pt-20 pb-12">
+<!-- Carousel Sections -->
+<div class="carousel-container flex overflow-x-auto h-full flex-1 touch-pan-x" id="carousel">
+<!-- Slide 1 -->
+<section class="carousel-slide flex-none w-full flex flex-col items-center justify-center px-container-margin">
+<div class="bg-surface-container-low rounded-[40px] p-8 w-full max-w-sm aspect-square flex flex-col items-center justify-center relative shadow-[0px_10px_30px_rgba(0,0,0,0.04)] border border-surface-variant/30 overflow-hidden">
+<div class="absolute top-4 right-6 text-4xl">💰</div>
+<div class="w-full h-48 mb-6 rounded-2xl overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A hyper-modern digital visualization of a financial dashboard on a clean white background. The interface features minimalist line charts in Electric Teal and soft glowing accents of Mint. Soft, high-key studio lighting creates a professional and encouraging lifestyle aesthetic with plenty of whitespace and high-fidelity textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAUqNZMe86I1_X6rAU71AP89E1ZQj7rDSLC0OS-He5uVlwEKCKvn__U4gh87U7MH4kZEmmZ2o_BvFWc2Vxz0tR6xKX4gNjpwfYXmI19wsHZWAs850zmcqyPyCSH2F9CCLYF5Gly_lSWqowEs3tpHAjwfotI63VMJEeb8ohQ7F3YWCtnjOUFlKS4scZBQ27q3R02gXvIfK2DKMoP_rxChGLenuKk5-sn0f01wo00ms9iozeR6lQSzeXS4lZfFtx8oDq8UKtS2nkvOse"/>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-center text-on-surface">Track every ₱/$ without the stress</h2>
+<p class="text-on-surface-variant text-center mt-4 font-body-md">Connect your accounts and see where your money goes automatically.</p>
+</div>
+</section>
+<!-- Slide 2 -->
+<section class="carousel-slide flex-none w-full flex flex-col items-center justify-center px-container-margin">
+<div class="bg-surface-container-low rounded-[40px] p-8 w-full max-w-sm aspect-square flex flex-col items-center justify-center relative shadow-[0px_10px_30px_rgba(0,0,0,0.04)] border border-surface-variant/30 overflow-hidden">
+<div class="absolute top-4 right-6 text-4xl">🔥</div>
+<div class="w-full h-48 mb-6 rounded-2xl overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A vibrant lifestyle photograph of a group of Gen Z friends sharing a large artisanal pizza in a trendy, sun-lit urban cafe. The scene is bright and airy with high-key lighting, capturing a moment of joy and financial freedom. The color palette is warm but grounded by modern minimalist surroundings, reflecting a rewarding lifestyle experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfpXjB4NmR-veSi1rllxEsIKc3soKl6H0-er8SOCrZnTWsk9mlKVmJwUudYchuWbrIC-jyVWdSubz9Cx6xwY3_c52FeN4H8Ho3xTu2FFY9LpQRnUBkjwQcxWcpbnuX29oDAxzo1D3RLf80xC74TJLv9ivrPel91MokO5izkcMaohafCaXVxicZ_zX4hwIG5RqnVsQb67svZF_5t72VuK66aXY91mSKt7fZhCWep8scyGAmWrvpAAq1WuF-eWWR5x_WMO6eMORhKiT8"/>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-center text-on-surface">Save for what you love</h2>
+<p class="text-on-surface-variant text-center mt-4 font-body-md">Set goal buckets for travel, snacks, or that new tech you've been eyeing.</p>
+</div>
+</section>
+<!-- Slide 3 -->
+<section class="carousel-slide flex-none w-full flex flex-col items-center justify-center px-container-margin">
+<div class="bg-surface-container-low rounded-[40px] p-8 w-full max-w-sm aspect-square flex flex-col items-center justify-center relative shadow-[0px_10px_30px_rgba(0,0,0,0.04)] border border-surface-variant/30 overflow-hidden">
+<div class="absolute top-4 right-6 text-4xl">🧠</div>
+<div class="w-full h-48 mb-6 rounded-2xl overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A sophisticated 3D abstract rendering representing artificial intelligence through glowing translucent neural networks and fluid geometric shapes. The lighting is soft and ethereal with a primary palette of Electric Teal and deep Mint against a pristine white background. The aesthetic is clean, hyper-modern, and technologically advanced, conveying intelligence and clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA84USEWEwS0W7oh0eJBMiKq4bQlGTN-MTCo0bbZSMddmiUhz_NVId4-x_kUn4iz53UEdUUr-xYM4uGZ57u9m1oylWNaXRLa-uqhsnpZFAq89ve-HamMJFnLf8phkcwTiB1NgSUlL7NkPFNShfNv8zdoXEjFblxgaBI8k_C-1MZvJq8jHjnAHYX9jBLJxqMNsXSI460a-txE1NO_k13aO-UVuPLQqC9oRDEpDcaiQWWiW_9M1mvmLvTHsmGl_2TVYs3kAuHgJ8kgEby"/>
+</div>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-center text-on-surface">Get AI tips that don't suck</h2>
+<p class="text-on-surface-variant text-center mt-4 font-body-md">Personalized insights that help you grow your wealth without the boring lecture.</p>
+</div>
+</section>
+</div>
+<!-- Indicators and Buttons -->
+<footer class="mt-auto px-container-margin flex flex-col items-center gap-lg">
+<!-- Dot Indicators -->
+<div class="flex gap-2">
+<div class="dot h-2 w-2 rounded-full bg-outline-variant transition-all duration-300 active-dot" data-slide="0"></div>
+<div class="dot h-2 w-2 rounded-full bg-outline-variant transition-all duration-300" data-slide="1"></div>
+<div class="dot h-2 w-2 rounded-full bg-outline-variant transition-all duration-300" data-slide="2"></div>
+</div>
+<div class="w-full max-w-md flex flex-col gap-sm">
+<button class="w-full py-4 px-8 bg-primary text-on-primary font-label-md text-lg rounded-full shadow-[0px_10px_20px_rgba(0,106,97,0.2)] hover:opacity-90 active:scale-[0.98] transition-all">
+                    Get Started
+                </button>
+<button class="w-full py-2 text-primary font-label-md text-center hover:opacity-80 transition-opacity active:scale-[0.98]">
+                    I already have an account
+                </button>
+</div>
+</footer>
+</main>
+<script>
+        const carousel = document.getElementById('carousel');
+        const dots = document.querySelectorAll('.dot');
+        
+        carousel.addEventListener('scroll', () => {
+            const scrollLeft = carousel.scrollLeft;
+            const width = carousel.offsetWidth;
+            const activeIndex = Math.round(scrollLeft / width);
+            
+            dots.forEach((dot, index) => {
+                if (index === activeIndex) {
+                    dot.classList.add('active-dot');
+                } else {
+                    dot.classList.remove('active-dot');
+                }
+            });
+        });
+
+        // Click dots to scroll
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                carousel.scrollTo({
+                    left: index * carousel.offsetWidth,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body></html>

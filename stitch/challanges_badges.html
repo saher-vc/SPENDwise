@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SpendWise | Challenges &amp; Gamification</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#3b82f6",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#dbeafe",
+                        "on-primary-container": "#1e40af",
+                        "primary-fixed": "#3b82f6",
+                        secondary: "#64748b",
+                        "on-secondary": "#ffffff",
+                        surface: "#f8fafc",
+                        "on-surface": "#0f172a",
+                        "surface-variant": "#f1f5f9",
+                        "on-surface-variant": "#475569",
+                        "surface-container": "#ffffff",
+                        "surface-container-high": "#f1f5f9",
+                        "surface-dim": "#e2e8f0",
+                        background: "#ffffff",
+                        "on-background": "#0f172a",
+                        outline: "#94a3b8",
+                        "outline-variant": "#cbd5e1",
+                        error: "#ef4444"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        headline: ["Public Sans"],
+                        display: ["Public Sans"],
+                        body: ["Public Sans"],
+                        label: ["Public Sans"]
+                    },
+                    spacing: {
+                        'container-margin': '1.5rem',
+                        'xs': '0.5rem'
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 1rem;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-background sticky top-0 z-50 transition-opacity">
+<div class="flex justify-between items-center px-container-margin py-xs w-full w-full
+
+">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
+<img alt="User profile picture" data-alt="A professional headshot of a young adult male with a friendly expression, captured in soft, natural studio lighting. The background is a clean, neutral gray, emphasizing the subject's modern and approachable appearance. The overall aesthetic is crisp, high-definition, and aligned with a contemporary fintech application's user profile interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmf3TUOK24VzQX1_UpaqjiM226PsrpGmi9Ev_G8417mJxJQuqMVg0MBtriwGHgOP4xu8I92ekn67z8TwDL7lTUQnEGF0cdSVBmhKEmsa4aV7kgvI-cQ8jLyjXWBBSsHuzYPrNfu8wS5-PMOkgfkUJqSWP3i1VBD-lnHPKx7eIU83tCQUbHEydNMFCIsjElDKbLZD5pkfoDgeMPllPTYEV35mQjJvqKVBltKMrATXvzEJsIFMQrojMPk-kt01MAsVqT7LdHzqSXXH2v"/>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">SpendWise</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed">forum</span>
+</button>
+</div>
+</div>
+</header>
+<main class="w-full
+
+ px-container-margin mt-6">
+<!-- Score & Quick Actions -->
+<section class="flex flex-col md:flex-row justify-between items-center gap-4 mb-8">
+<div class="bg-primary-container text-on-primary-container px-6 py-4 rounded-2xl shadow-sm flex items-center gap-3 w-full md:w-auto">
+<span class="text-3xl font-bold">Your points: 150 🔥</span>
+</div>
+<button class="flex items-center gap-2 bg-white border border-outline-variant px-6 py-4 rounded-2xl font-bold text-primary shadow-sm hover:bg-surface-variant transition-colors w-full md:w-auto justify-center" onclick="toggleBadges()">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">emoji_events</span>
+                🏅 Badges
+            </button>
+</section>
+<!-- Challenges Section -->
+<h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">rocket_launch</span>
+            Available Challenges
+        </h2>
+<div class="bento-grid">
+<!-- Challenge 1: Coffee -->
+<div class="col-span-12 md:col-span-4 bg-white p-6 rounded-3xl shadow-sm border border-slate-100 flex flex-col justify-between group hover:shadow-md transition-shadow">
+<div>
+<div class="w-14 h-14 bg-amber-50 rounded-2xl flex items-center justify-center mb-4 text-amber-600">
+<span class="material-symbols-outlined text-3xl">coffee</span>
+</div>
+<h3 class="text-xl font-bold mb-1">Skip 1 coffee this week</h3>
+<p class="text-on-surface-variant text-sm mb-4">Small savings lead to big rewards. Opt for the office brew instead.</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full">+50 pts</span>
+<span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">New Badge</span>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-primary text-white font-bold py-3 rounded-xl hover:opacity-90 active:scale-95 transition-all">Join</button>
+<button class="px-3 border border-outline-variant rounded-xl hover:bg-surface-variant"><span class="material-symbols-outlined">more_horiz</span></button>
+</div>
+</div>
+<!-- Challenge 2: Weekend (Main Banner Style) -->
+<div class="col-span-12 md:col-span-8 relative overflow-hidden bg-slate-900 text-white p-8 rounded-3xl shadow-xl min-h-[300px] flex flex-col justify-end">
+<div class="absolute top-0 right-0 w-full h-full opacity-40">
+<img class="w-full h-full object-cover" data-alt="A serene and stylized urban evening landscape under a deep indigo sky filled with twinkling stars. The scene depicts a quiet city street with soft glowing warm lights from windows, conveying a peaceful and cozy 'staying in' atmosphere. The aesthetic is modern, minimalist, and uses a palette of deep blues and vibrant amber highlights to reflect a luxury fintech brand's night-mode visuals." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3FSZqOgpZ4WBzTP3gkQoS1_N6vY9vAhroYqCi8XMwYIeLa9uOjnNqsTWJ0n50sh8EMs22uZ_j4GJDpL-8Dd4kBGeGt0MvjbPN2Ws6C25ffGlJgUbk0lxNjQ4o6Dtj-RHrTvcP1ZtKMcaUsxvuszfTpv5bvtqr-7AdHqzd6-bSTcY7QoAVlRsu9Pl479MnVrLELGoC4pIMrokfZ3jnUijf62hYz0Q8vDXuexIMwY-7Hf8nhFXEqpIs6zKyGLnbwLYLsM8KaRjZjvEX"/>
+</div>
+<div class="relative z-10">
+<div class="inline-block bg-green-500 text-white text-xs font-black px-3 py-1 rounded-full mb-3 uppercase tracking-widest">High Reward</div>
+<h3 class="text-4xl font-black mb-2">No-spend weekend</h3>
+<p class="text-slate-300 max-w-md mb-6">Lock your cards and enjoy the free things in life. +100 points towards your next level.</p>
+<div class="flex items-center gap-4">
+<button class="bg-white text-slate-900 font-bold px-8 py-3 rounded-xl hover:bg-slate-100 active:scale-95 transition-all">Join Challenge</button>
+<span class="text-lg font-bold text-green-400">+100 pts</span>
+</div>
+</div>
+</div>
+<!-- Challenge 3: Green Days -->
+<div class="col-span-12 md:col-span-12 glass-card p-8 rounded-3xl flex flex-col md:flex-row items-center gap-8 border-2 border-primary/10">
+<div class="flex-shrink-0 animate-float">
+<div class="w-24 h-24 bg-primary text-white rounded-full flex items-center justify-center text-5xl shadow-lg shadow-primary/30">
+                        🏃
+                    </div>
+</div>
+<div class="flex-grow text-center md:text-left">
+<h3 class="text-2xl font-bold mb-2">5 green days in a row</h3>
+<p class="text-on-surface-variant mb-4">Stay under your daily budget for five consecutive days. Consistency is the key to financial freedom.</p>
+<div class="w-full bg-surface-dim h-3 rounded-full overflow-hidden mb-2">
+<div class="bg-primary h-full w-[40%] transition-all duration-1000"></div>
+</div>
+<div class="flex justify-between text-xs font-bold text-on-surface-variant">
+<span>Progress: 2/5 days</span>
+<span>Target: +200 pts</span>
+</div>
+</div>
+<button class="w-full md:w-auto bg-primary-container text-on-primary-container font-bold px-8 py-4 rounded-2xl hover:bg-primary hover:text-white transition-all active:scale-95">Mark progress</button>
+</div>
+</div>
+<!-- Badges View (Hidden by default, shown via modal logic) -->
+<div class="fixed inset-0 z-[60] hidden flex items-center justify-center px-4" id="badgesModal">
+<div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="toggleBadges()"></div>
+<div class="bg-white w-full max-w-2xl rounded-[2rem] overflow-hidden relative shadow-2xl">
+<div class="p-8">
+<div class="flex justify-between items-center mb-8">
+<h2 class="text-3xl font-black">Your Collection</h2>
+<button class="w-10 h-10 flex items-center justify-center bg-surface-variant rounded-full text-on-surface-variant" onclick="toggleBadges()">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-6 mb-8">
+<!-- Badge 1 -->
+<div class="flex flex-col items-center p-4 bg-surface-variant/50 rounded-2xl hover:scale-105 transition-transform cursor-pointer">
+<span class="text-4xl mb-2">☕</span>
+<span class="font-bold text-sm">Caffeine King</span>
+<span class="text-[10px] text-on-surface-variant mt-1">Unlocked 2d ago</span>
+</div>
+<!-- Badge 2 -->
+<div class="flex flex-col items-center p-4 bg-primary-container rounded-2xl hover:scale-105 transition-transform cursor-pointer">
+<span class="text-4xl mb-2">🛡️</span>
+<span class="font-bold text-sm">Budget Guardian</span>
+<span class="text-[10px] text-on-primary-container mt-1">Unlocked Today</span>
+</div>
+<!-- Badge 3 -->
+<div class="flex flex-col items-center p-4 bg-surface-variant/50 rounded-2xl hover:scale-105 transition-transform cursor-pointer">
+<span class="text-4xl mb-2">🦉</span>
+<span class="font-bold text-sm">Wise Owl</span>
+<span class="text-[10px] text-on-surface-variant mt-1">Unlocked 1w ago</span>
+</div>
+<!-- Badge 4 (Locked) -->
+<div class="flex flex-col items-center p-4 border-2 border-dashed border-outline-variant rounded-2xl grayscale opacity-50">
+<span class="text-4xl mb-2">🚀</span>
+<span class="font-bold text-sm">Moon Shot</span>
+<span class="text-[10px] text-on-surface-variant mt-1">Locked</span>
+</div>
+<!-- Badge 5 (Locked) -->
+<div class="flex flex-col items-center p-4 border-2 border-dashed border-outline-variant rounded-2xl grayscale opacity-50">
+<span class="text-4xl mb-2">💎</span>
+<span class="font-bold text-sm">Diamond Hands</span>
+<span class="text-[10px] text-on-surface-variant mt-1">Locked</span>
+</div>
+<!-- Badge 6 (Locked) -->
+<div class="flex flex-col items-center p-4 border-2 border-dashed border-outline-variant rounded-2xl grayscale opacity-50">
+<span class="text-4xl mb-2">⚡</span>
+<span class="font-bold text-sm">Sparkly Saver</span>
+<span class="text-[10px] text-on-surface-variant mt-1">Locked</span>
+</div>
+</div>
+<button class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold py-5 rounded-2xl flex items-center justify-center gap-3 shadow-lg shadow-indigo-200 hover:shadow-xl transition-all active:scale-95">
+<span class="material-symbols-outlined">share</span>
+                        Share to Stories 📲
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container dark:bg-surface-dim shadow-[0px_-4px_20px_rgba(0,0,0,0.04)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors active:scale-90 transition-transform duration-150 px-4 py-1" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-full px-4 py-1 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">trophy</span>
+<span class="font-label-sm text-label-sm">Challenges</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors active:scale-90 transition-transform duration-150 px-4 py-1" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-sm text-label-sm">Friends</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors active:scale-90 transition-transform duration-150 px-4 py-1" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-label-sm text-label-sm">Analytics</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors active:scale-90 transition-transform duration-150 px-4 py-1" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</a>
+</nav>
+<script>
+        function toggleBadges() {
+            const modal = document.getElementById('badgesModal');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            } else {
+                modal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Simple button interaction feedback
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const originalText = btn.innerHTML;
+                if (btn.innerText === "Join" || btn.innerText === "Join Challenge") {
+                    btn.innerText = "Joined! 🎉";
+                    btn.classList.add('bg-green-500', 'text-white');
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.classList.remove('bg-green-500', 'text-white');
+                    }, 2000);
+                }
+            });
+        });
+    </script>
+</body></html>

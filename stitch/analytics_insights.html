@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SpendWise Analytics</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#6366f1",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#e0e7ff",
+                        "on-primary-container": "#1e1b4b",
+                        secondary: "#10b981",
+                        "on-secondary": "#ffffff",
+                        surface: "#f8fafc",
+                        "on-surface": "#0f172a",
+                        "on-surface-variant": "#64748b",
+                        "surface-container": "#f1f5f9",
+                        "surface-container-high": "#e2e8f0",
+                        "surface-dim": "#f8fafc",
+                        outline: "#cbd5e1",
+                        "outline-variant": "#e2e8f0",
+                        error: "#ef4444",
+                        mint: "#10b981",
+                        coral: "#fb7185",
+                        background: "#ffffff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        headline: ["Public Sans"],
+                        display: ["Public Sans"],
+                        body: ["Public Sans"],
+                        label: ["Public Sans"]
+                    },
+                    padding: {
+                        "container-margin": "1.5rem"
+                    },
+                    spacing: {
+                        "xs": "0.5rem"
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chart-gradient-mask {
+            mask-image: linear-gradient(to top, transparent, black);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface pb-24">
+<!-- Top App Bar -->
+<header class="bg-surface dark:bg-background fixed top-0 w-full z-50">
+<div class="flex justify-between items-center px-container-margin py-xs w-full w-full
+
+ h-16">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional studio portrait of a young adult with a friendly expression, featuring soft cinematic lighting. The character has a clean-cut look and is positioned against a solid, minimalist pastel background that matches a clean, modern UI aesthetic. The image is rendered in a high-quality, digital illustration style with smooth gradients and crisp lines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKYGYrtiu7-HnDSBukmzGHzaca2eC7NB_aTyajxn2s1FX5UAqnx3sw5NSmARBDDg1PiMy1xedp8OhlOIDb_PB6c1RE15J8g4MY4YVGH3lz_cGsUCXwCXwn4LmcTkDTyZynLhBfXpEU3TCGsTolBdBcYZHhBlHwu7UrlqhlSVpWTJvrskm_m-LaDcffnA5bXUBJ3tu9WCXKNTaZ3GCJXqoAeS-deiGVH4qXL_47XwBydtJyUaya_kzGc148K_1FnaFtbni65vEppw4X"/>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">SpendWise</h1>
+</div>
+<button class="material-symbols-outlined text-primary dark:text-primary-fixed hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-200">forum</button>
+</div>
+</header>
+<main class="mt-20 px-4 w-full
+
+ space-y-6">
+<!-- Tab Navigation (Scrolled) -->
+<nav class="flex overflow-x-auto gap-2 py-2 no-scrollbar -mx-4 px-4 sticky top-16 bg-surface/80 backdrop-blur-md z-40">
+<button class="tab-btn px-6 py-2 rounded-full font-bold text-sm bg-primary text-white transition-all" onclick="switchTab('overview')">Overview</button>
+<button class="tab-btn px-6 py-2 rounded-full font-bold text-sm bg-surface-container text-on-surface-variant transition-all hover:bg-surface-container-high" onclick="switchTab('trends')">Spending Trends</button>
+<button class="tab-btn px-6 py-2 rounded-full font-bold text-sm bg-surface-container text-on-surface-variant transition-all hover:bg-surface-container-high" onclick="switchTab('categories')">Categories</button>
+<button class="tab-btn px-6 py-2 rounded-full font-bold text-sm bg-surface-container text-on-surface-variant transition-all hover:bg-surface-container-high" onclick="switchTab('insights')">Insights</button>
+<button class="tab-btn px-6 py-2 rounded-full font-bold text-sm bg-surface-container text-on-surface-variant transition-all hover:bg-surface-container-high" onclick="switchTab('mood')">Mood</button>
+<button class="tab-btn px-6 py-2 rounded-full font-bold text-sm bg-surface-container text-on-surface-variant transition-all hover:bg-surface-container-high" onclick="switchTab('leaderboard')">Leaderboard</button>
+</nav>
+<!-- Dynamic Content Canvas -->
+<div class="space-y-6 pb-8" id="content-area">
+<!-- Overview Section (Default) -->
+<section class="space-y-6 animate-in fade-in duration-500" id="overview-section">
+<!-- Bento Header -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="col-span-2 p-6 rounded-2xl bg-primary text-white flex flex-col justify-between h-48 shadow-lg shadow-primary/20">
+<div>
+<p class="text-white/80 text-sm font-medium">Total Spend (June)</p>
+<h2 class="text-4xl font-extrabold mt-1 tracking-tight">$2,450.80</h2>
+</div>
+<div class="flex items-center gap-2 text-xs bg-white/20 w-fit px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-sm">trending_down</span>
+                            12% less than last month
+                        </div>
+</div>
+<div class="p-6 rounded-2xl bg-white border border-outline-variant flex flex-col justify-between shadow-sm">
+<p class="text-on-surface-variant text-sm font-medium">Daily Avg</p>
+<h3 class="text-2xl font-bold">$81.60</h3>
+</div>
+<div class="p-6 rounded-2xl bg-white border border-outline-variant flex flex-col justify-between shadow-sm">
+<p class="text-on-surface-variant text-sm font-medium">Savings Rate</p>
+<h3 class="text-2xl font-bold text-mint">24.5%</h3>
+</div>
+</div>
+<!-- Main Overview Chart -->
+<div class="p-6 rounded-2xl bg-white border border-outline-variant shadow-sm space-y-4">
+<div class="flex justify-between items-center">
+<h4 class="font-bold text-lg">Daily Spending Flow</h4>
+<div class="flex gap-2">
+<span class="w-3 h-3 rounded-full bg-primary mt-1.5"></span>
+<span class="text-sm font-medium text-on-surface-variant">Spending</span>
+</div>
+</div>
+<div class="h-64 w-full relative overflow-hidden">
+<!-- Simulated Chart Grid -->
+<div class="absolute inset-0 flex flex-col justify-between py-4">
+<div class="border-t border-dashed border-outline-variant w-full h-0"></div>
+<div class="border-t border-dashed border-outline-variant w-full h-0"></div>
+<div class="border-t border-dashed border-outline-variant w-full h-0"></div>
+</div>
+<!-- Simulated SVG Line Chart -->
+<svg class="absolute inset-0 w-full h-full drop-shadow-xl" preserveaspectratio="none" viewbox="0 0 100 40">
+<defs>
+<lineargradient id="gradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="rgba(99, 102, 241, 0.3)"></stop>
+<stop offset="100%" stop-color="rgba(99, 102, 241, 0)"></stop>
+</lineargradient>
+</defs>
+<path d="M0,35 Q10,15 20,25 T40,10 T60,30 T80,15 T100,20" fill="none" stroke="#6366f1" stroke-linecap="round" stroke-width="1.5" vector-effect="non-scaling-stroke"></path>
+<path d="M0,35 Q10,15 20,25 T40,10 T60,30 T80,15 T100,20 V40 H0 Z" fill="url(#gradient)" vector-effect="non-scaling-stroke"></path>
+</svg>
+<!-- Active Point Marker -->
+<div class="absolute left-[40%] top-[25%] -translate-x-1/2 -translate-y-1/2">
+<div class="w-3 h-3 bg-white border-2 border-primary rounded-full shadow-md animate-pulse"></div>
+<div class="absolute top-[-30px] left-1/2 -translate-x-1/2 bg-on-primary-container text-white px-2 py-1 rounded text-[10px] font-bold">$142.00</div>
+</div>
+</div>
+<div class="flex justify-between text-[10px] font-bold text-on-surface-variant/60 uppercase tracking-widest pt-2">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+</div>
+</div>
+</section>
+<!-- Categories Grid -->
+<section class="hidden space-y-6" id="categories-section">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Donut Card -->
+<div class="md:col-span-5 p-6 rounded-2xl bg-white border border-outline-variant flex flex-col items-center justify-center relative overflow-hidden h-80">
+<div class="relative w-48 h-48">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<circle cx="18" cy="18" fill="none" r="16" stroke="#f1f5f9" stroke-width="4"></circle>
+<circle cx="18" cy="18" fill="none" r="16" stroke="#6366f1" stroke-dasharray="45, 100" stroke-linecap="round" stroke-width="4"></circle>
+<circle cx="18" cy="18" fill="none" r="16" stroke="#fb7185" stroke-dasharray="25, 100" stroke-dashoffset="-45" stroke-linecap="round" stroke-width="4"></circle>
+<circle cx="18" cy="18" fill="none" r="16" stroke="#10b981" stroke-dasharray="30, 100" stroke-dashoffset="-70" stroke-linecap="round" stroke-width="4"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-xs text-on-surface-variant font-medium">Monthly</span>
+<span class="text-2xl font-black">100%</span>
+</div>
+</div>
+<div class="mt-6 flex gap-4 text-xs font-bold">
+<div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-primary"></span> Food</div>
+<div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-coral"></span> Fun</div>
+<div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-mint"></span> Rent</div>
+</div>
+</div>
+<!-- List Card -->
+<div class="md:col-span-7 space-y-4">
+<div class="p-4 rounded-xl bg-white border border-outline-variant flex items-center justify-between group hover:border-primary transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">restaurant</span>
+</div>
+<div>
+<h4 class="font-bold">Food &amp; Dining</h4>
+<p class="text-xs text-on-surface-variant">42 Transactions</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold">$840.00</p>
+<p class="text-xs text-coral font-bold">+12% vs last mo</p>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-white border border-outline-variant flex items-center justify-between group hover:border-mint transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center text-mint">
+<span class="material-symbols-outlined">directions_car</span>
+</div>
+<div>
+<h4 class="font-bold">Transportation</h4>
+<p class="text-xs text-on-surface-variant">18 Transactions</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold">$210.50</p>
+<p class="text-xs text-mint font-bold">-4.5% vs last mo</p>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-white border border-outline-variant flex items-center justify-between group hover:border-coral transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-rose-100 flex items-center justify-center text-coral">
+<span class="material-symbols-outlined">theater_comedy</span>
+</div>
+<div>
+<h4 class="font-bold">Entertainment</h4>
+<p class="text-xs text-on-surface-variant">6 Transactions</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-bold">$350.00</p>
+<p class="text-xs text-coral font-bold">+28% vs last mo</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Insights Section -->
+<section class="hidden grid grid-cols-1 md:grid-cols-2 gap-4" id="insights-section">
+<div class="p-6 rounded-3xl bg-primary-container text-on-primary-container relative overflow-hidden group">
+<div class="relative z-10 flex flex-col h-full justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="text-2xl">🧠</span>
+<span class="font-bold text-sm tracking-widest uppercase opacity-70">AI Insight</span>
+</div>
+<h3 class="text-xl font-bold leading-tight">You spend 30% less on weekends. Keep it up!</h3>
+<p class="text-sm opacity-80">Friday nights are your biggest saving opportunity. Try checking in then.</p>
+<button class="mt-2 bg-on-primary-container text-white py-2 px-6 rounded-full font-bold w-fit text-sm transition-transform active:scale-90">View Trend</button>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10 transform rotate-12 group-hover:rotate-0 transition-transform duration-500">
+<span class="material-symbols-outlined !text-9xl">psychology</span>
+</div>
+</div>
+<div class="p-6 rounded-3xl bg-surface-container-high border border-outline-variant relative overflow-hidden group">
+<div class="relative z-10 flex flex-col h-full justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="text-2xl">🚀</span>
+<span class="font-bold text-sm tracking-widest uppercase opacity-70">Goal Forecast</span>
+</div>
+<h3 class="text-xl font-bold leading-tight">You're on track to save $500 more this quarter.</h3>
+<p class="text-sm opacity-80">Switching from your "Fun" category to "Invest" could boost this by $150.</p>
+<button class="mt-2 bg-primary text-white py-2 px-6 rounded-full font-bold w-fit text-sm transition-transform active:scale-90">Adjust Budget</button>
+</div>
+</div>
+</section>
+<!-- Mood Section -->
+<section class="hidden space-y-6" id="mood-section">
+<div class="p-8 rounded-3xl bg-white border border-outline-variant shadow-sm space-y-8 text-center">
+<div class="max-w-md mx-auto space-y-2">
+<h3 class="text-2xl font-black">Mood vs. Spending</h3>
+<p class="text-on-surface-variant">"You tend to feel <span class="text-primary font-bold">😊</span> when spending under $20/day."</p>
+</div>
+<div class="h-64 w-full relative">
+<!-- Mood Chart (1-5) -->
+<div class="absolute inset-0 flex flex-col justify-between text-[10px] text-on-surface-variant/50 font-bold pr-2 items-end">
+<span>Excited</span><span>Happy</span><span>Neutral</span><span>Tired</span><span>Sad</span>
+</div>
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 50">
+<!-- Spend Bars -->
+<rect fill="#f1f5f9" height="20" rx="2" width="4" x="5" y="30"></rect>
+<rect fill="#f1f5f9" height="40" rx="2" width="4" x="15" y="10"></rect>
+<rect fill="#f1f5f9" height="10" rx="2" width="4" x="25" y="40"></rect>
+<rect fill="#f1f5f9" height="35" rx="2" width="4" x="35" y="15"></rect>
+<rect fill="#f1f5f9" height="25" rx="2" width="4" x="45" y="25"></rect>
+<rect fill="#f1f5f9" height="8" rx="2" width="4" x="55" y="42"></rect>
+<rect fill="#f1f5f9" height="38" rx="2" width="4" x="65" y="12"></rect>
+<!-- Mood Line -->
+<path d="M7,15 Q17,5 27,20 T47,10 T67,25" fill="none" stroke="#6366f1" stroke-linecap="round" stroke-width="2" vector-effect="non-scaling-stroke"></path>
+<circle cx="7" cy="15" fill="#6366f1" r="1"></circle>
+<circle cx="27" cy="20" fill="#6366f1" r="1"></circle>
+<circle cx="47" cy="10" fill="#6366f1" r="1"></circle>
+</svg>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 rounded-2xl bg-primary-container/30 border border-primary/10">
+<span class="block text-3xl mb-1">😇</span>
+<span class="text-xs font-bold uppercase tracking-widest text-primary opacity-70">Zen State</span>
+<p class="font-bold">Weekends</p>
+</div>
+<div class="p-4 rounded-2xl bg-coral/10 border border-coral/10">
+<span class="block text-3xl mb-1">🫠</span>
+<span class="text-xs font-bold uppercase tracking-widest text-coral opacity-70">Stress Peak</span>
+<p class="font-bold">Tuesdays</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Leaderboard Section -->
+<section class="hidden space-y-6" id="leaderboard-section">
+<div class="flex items-center justify-between">
+<h3 class="font-black text-2xl">Global Savers</h3>
+<span class="text-xs bg-surface-container-high px-3 py-1 rounded-full font-bold">Top 1%</span>
+</div>
+<div class="space-y-3">
+<!-- Top 1 -->
+<div class="p-5 rounded-3xl bg-gradient-to-br from-amber-50 to-amber-100 border-2 border-amber-200 flex items-center justify-between shadow-md">
+<div class="flex items-center gap-4">
+<span class="text-2xl font-black text-amber-600">🥇</span>
+<div class="w-12 h-12 rounded-full border-2 border-amber-400 p-0.5">
+<img alt="Leaderboard User" class="w-full h-full rounded-full bg-white" data-alt="A whimsical digital avatar representing a professional profile. The character has a cheerful expression and is set against a clean, neutral studio background. The style is modern, minimalist, and utilizes soft, diffused lighting to create a high-end app aesthetic consistent with premium fintech branding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAtewnyimTwXrAJXUp24EIhnLBpHcE2JQGwLL4QZgtO4yWic-DWMO7yAYPa7NyfnEzsouzXKw_6mi1_ysZsthHV3teQTCqt3OUFWllqBXPnzLR9neirHfMt14jMejOJbgkPnX_igOnw4jIKySOAroEfugN_uQkUEtEUpFmaUeYR6cyI9qZfv7c-evoMWEZzLX8HiMJicQDfFm5vy6zqXM-fBe5iv-1V2gR6sgvr3mI7jk4I_htBlSKxoOCPKMFoWlGU6azQ2z-JdI5"/>
+</div>
+<div>
+<h4 class="font-bold text-amber-900">PizzaLover</h4>
+<p class="text-xs font-medium text-amber-700">98.2 Savvy Score</p>
+</div>
+</div>
+<div class="text-right">
+<span class="text-sm font-black text-amber-600">#1</span>
+</div>
+</div>
+<!-- Others -->
+<div class="p-4 rounded-2xl bg-white border border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="text-lg font-black text-on-surface-variant w-6 text-center">2</span>
+<div class="w-10 h-10 rounded-full bg-slate-100 overflow-hidden">
+<img alt="User 2" data-alt="A clean and friendly digital avatar with a professional vibe. The character is illuminated with bright, clear, and modern lighting that feels open and positive. The background is a simple, high-key white, aligning with a light-mode UI system for a financial tracking application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiNPjWe8mFdB1LqPaDUF4T4VEcD8w73Ws6NxS4tg17aqLSJsxTg45m21ssAMbZlI52f1KlQYQuwG1j6V9fWQz9ItnX1kHRX4myZQqnvjgwlyYOetczSYldiM2J1TKK-sQQChyw2xshhEBktQRWQEjAy_P225cMs0cqi_35ay5Va69LS3KowZC5mt-Lkw4spMfHU-zWKwe2MlG9IzynoE2PZ9dfROCa3KME9tndVO0ZA0dE2rv1X6N2NOrJpo5ZLcw5OG8Rbb-dZldY"/>
+</div>
+<h4 class="font-bold">EcoWarrior</h4>
+</div>
+<span class="text-sm font-bold text-mint">94.1</span>
+</div>
+<div class="p-4 rounded-2xl bg-white border border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="text-lg font-black text-on-surface-variant w-6 text-center">3</span>
+<div class="w-10 h-10 rounded-full bg-slate-100 overflow-hidden">
+<img alt="User 3" data-alt="A vibrant, modern profile illustration showcasing a character with a calm and confident demeanor. The lighting is soft and professional, and the overall color palette uses refined pastels and deep indigos. This image is designed to fit seamlessly into a contemporary, sleek user interface for an analytics platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwqcostU65eQsT8xrqd3dbs72CmhdZNJudN1F_UmRz0Xu_cbOfEU5qNuQKhno6ccH5-7S2MVBZCsbIWuhqicxG3iBHAK5HukWYJNEr9z43quNBl18AD3Dyq7iSWP9s7s-UyRaAZ0K41smykZ1kT2O3a5xPruRVmrYT5sdxw1kY-sCsBTIJ-Iv-aQBwg-Lrj_IxY7K2X34F3AQRvzGVKS2l09KH_e3fs2XzbrBkG1XG4FQTqpThRcqOv6Jw9g57dkfcH6CjzLIO-9Z5"/>
+</div>
+<h4 class="font-bold">TechStash</h4>
+</div>
+<span class="text-sm font-bold text-mint">92.8</span>
+</div>
+<div class="p-4 rounded-2xl bg-primary-container/20 border-2 border-primary/20 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="text-lg font-black text-primary w-6 text-center">42</span>
+<div class="w-10 h-10 rounded-full bg-primary overflow-hidden p-0.5">
+<img alt="Me" data-alt="A friendly and professional digital avatar of a person with a bright, engaged expression. The background is a clean, minimalistic office setting with soft, high-key lighting that emphasizes a modern, light-themed user interface. The color scheme is composed of calming blues and professional grays." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUZQldWKl_tq9JT0cYSzahsqZdMuHK9S9DTEDpStoCW6a0ijOajkikutCPD7yEpJD-eYtni9k-8mgD_P5IT4xtGo1artymonz0Cgsx9NarDGajl_hr7rcDa-eaDpXvgSOkMtqUIMOzD7hZWh0gcAqsKTittzQKm3HcOsUgHGF461SoDKJhAxdnEvoOGyXDdjBs2VRiZlNvtqnpJvNcF1gLEVgMfYiDZAhPuKfxxUY55O3Lox7EIEZV8QApOA5klWxXNJluj7B4PvY0"/>
+</div>
+<h4 class="font-bold">You (Felix)</h4>
+</div>
+<span class="text-sm font-bold text-primary">78.5</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface-container dark:bg-surface-dim shadow-[0px_-4px_20px_rgba(0,0,0,0.04)] px-4 pb-4 pt-2 flex justify-around items-center rounded-t-xl">
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm mt-1">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">trophy</span>
+<span class="font-label-sm text-label-sm mt-1">Challenges</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-sm text-label-sm mt-1">Friends</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-full px-4 py-1 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bar_chart</span>
+<span class="font-label-sm text-label-sm mt-1">Analytics</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline hover:bg-surface-container-high dark:hover:bg-surface-variant transition-colors active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm mt-1">Settings</span>
+</button>
+</nav>
+<script>
+        function switchTab(tabId) {
+            // Hide all sections
+            const sections = ['overview-section', 'categories-section', 'insights-section', 'mood-section', 'leaderboard-section'];
+            sections.forEach(id => {
+                document.getElementById(id).classList.add('hidden');
+            });
+            
+            // Show selected section
+            const targetSection = document.getElementById(tabId + '-section');
+            if (targetSection) {
+                targetSection.classList.remove('hidden');
+                targetSection.classList.add('animate-in', 'fade-in', 'slide-in-from-bottom-2', 'duration-500');
+            }
+
+            // Update tab styles
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                if (btn.innerText.toLowerCase() === tabId || (tabId === 'overview' && btn.innerText === 'Overview') || (tabId === 'trends' && btn.innerText === 'Spending Trends')) {
+                    btn.classList.remove('bg-surface-container', 'text-on-surface-variant');
+                    btn.classList.add('bg-primary', 'text-white');
+                } else {
+                    btn.classList.add('bg-surface-container', 'text-on-surface-variant');
+                    btn.classList.remove('bg-primary', 'text-white');
+                }
+            });
+        }
+
+        // Add some hover interactions for the charts
+        document.querySelectorAll('.p-4.rounded-xl').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+                card.style.transition = 'all 0.2s ease';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SpendWise AI Chat</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#006B5E",
+                        "on-primary": "#FFFFFF",
+                        "primary-container": "#76F8E1",
+                        "on-primary-container": "#00201B",
+                        secondary: "#4A635F",
+                        "on-secondary": "#FFFFFF",
+                        "secondary-container": "#CCE8E2",
+                        "on-secondary-container": "#05201C",
+                        tertiary: "#456179",
+                        "on-tertiary": "#FFFFFF",
+                        "tertiary-container": "#CCE5FF",
+                        "on-tertiary-container": "#001D31",
+                        error: "#BA1A1A",
+                        "on-error": "#FFFFFF",
+                        surface: "#F4FBF9",
+                        "on-surface": "#161D1C",
+                        "surface-variant": "#DAE5E1",
+                        "on-surface-variant": "#3F4947",
+                        outline: "#6F7977",
+                        "outline-variant": "#BEC9C6",
+                        "surface-container": "#E9F0EE",
+                        "surface-dim": "#D5DBDA",
+                        "electric-teal": "#1DE9B6"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "1.5rem",
+                        "2xl": "2rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Public Sans"],
+                        "display": ["Public Sans"],
+                        "body": ["Public Sans"],
+                        "label": ["Public Sans"]
+                    },
+                    spacing: {
+                        'container-margin': '1.5rem',
+                        'xs': '0.5rem'
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chat-bubble-bot {
+            border-bottom-left-radius: 4px;
+        }
+        .chat-bubble-user {
+            border-bottom-right-radius: 4px;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #BEC9C6;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface sticky top-0 z-50 w-full">
+<div class="flex justify-between items-center px-container-margin py-xs w-full w-full
+
+">
+<div class="flex items-center gap-4">
+<button class="active:scale-95 transition-transform duration-200 text-on-surface-variant">
+<span class="material-symbols-outlined text-[28px]" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Chat with SpendWise AI 💬</h1>
+</div>
+<div class="flex items-center gap-3">
+<button class="hover:opacity-80 transition-opacity active:scale-95 text-primary">
+<span class="material-symbols-outlined text-[24px]" data-icon="forum">forum</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high border-2 border-primary-container">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a smiling young person with a friendly expression. They are set against a soft, blurred studio background with warm, high-key lighting that emphasizes a clean and modern aesthetic. The overall mood is approachable and energetic, aligning with a bright, light-mode user interface design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCf5klxr-yPi5yjRCas8twx44dNQLayPRepg8230NtxD2iL2wYo3OcPZ3wXJsiDtFd5iKiaxNfEtXGJnnxKOk76V0VLDh4YZoMxA8VIHC3q14n7lbcQdpWYz1mQ01iiTkZ4YZQWii36Sj0CQw6jqWidaoeq8Ecud1DpCUCvF_i-SPb-5ul8qLsp41cV4L5zOx9gPkI0GDXvZRwEAArMYDPxTnBT5rhNDHEL-KqePpYZSFo5N2dAurA7xqulJReR561R14yLyKqjBAHH"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas (Chat Interface) -->
+<main class="flex-grow flex flex-col w-full max-w-3xl mx-auto px-4 pb-32">
+<!-- Chat History -->
+<div class="flex flex-col gap-6 pt-8 overflow-y-auto" id="chat-container">
+<!-- Bot Welcome Message -->
+<div class="flex items-start gap-3 max-w-[85%] animate-in fade-in slide-in-from-left-4 duration-500">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary text-[18px]" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="chat-bubble-bot bg-primary-container text-on-primary-container p-4 rounded-xl shadow-sm">
+<p class="text-[16px] leading-relaxed">Heyyy 👋 I'm your money buddy... Ask me anything!</p>
+</div>
+</div>
+<!-- Bot Second Part -->
+<div class="flex items-start gap-3 max-w-[85%] ml-11 animate-in fade-in slide-in-from-left-4 duration-700 delay-200">
+<div class="chat-bubble-bot bg-primary-container text-on-primary-container p-4 rounded-xl shadow-sm">
+<p class="text-[16px] leading-relaxed">Whether you're trying to save for that new concert or just wondering where all your cash went last weekend, I gotchu. 💅</p>
+</div>
+</div>
+<!-- User Sample Message -->
+<div class="flex flex-row-reverse items-start gap-3 max-w-[85%] self-end animate-in fade-in slide-in-from-right-4 duration-500 delay-500">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+<div class="chat-bubble-user bg-surface-container-high text-on-surface p-4 rounded-xl shadow-sm border border-outline-variant">
+<p class="text-[16px] leading-relaxed">Can I afford to go out for sushi tonight? 🍣</p>
+</div>
+</div>
+<!-- Bot Response -->
+<div class="flex items-start gap-3 max-w-[85%] animate-in fade-in slide-in-from-left-4 duration-500 delay-1000">
+<div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-on-primary text-[18px]" data-icon="smart_toy" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+</div>
+<div class="chat-bubble-bot bg-primary-container text-on-primary-container p-4 rounded-xl shadow-sm">
+<p class="text-[16px] leading-relaxed">Checking your 'Social' budget... You've got $45 left for the week. Sushi sounds like a vibe, but maybe stick to the regular rolls instead of the dragon roll if you want to save for Friday! 🍱✨</p>
+</div>
+</div>
+</div>
+<!-- Quick Action Chips -->
+<div class="mt-8 flex flex-wrap gap-2 justify-center">
+<button class="px-4 py-2 bg-surface border border-primary text-primary font-medium rounded-full text-[14px] hover:bg-primary-container transition-colors active:scale-95" onclick="sendQuickMsg('How much can I spend today?')">
+                How much can I spend today?
+            </button>
+<button class="px-4 py-2 bg-surface border border-primary text-primary font-medium rounded-full text-[14px] hover:bg-primary-container transition-colors active:scale-95" onclick="sendQuickMsg('Give me a pizza fact 🍕')">
+                Give me a pizza fact 🍕
+            </button>
+<button class="px-4 py-2 bg-surface border border-primary text-primary font-medium rounded-full text-[14px] hover:bg-primary-container transition-colors active:scale-95" onclick="sendQuickMsg('I overspent this week - help')">
+                I overspent this week - help
+            </button>
+</div>
+</main>
+<!-- Chat Input Section (Fixed Bottom Above Nav) -->
+<div class="fixed bottom-[88px] left-0 w-full px-4 z-40 bg-gradient-to-t from-surface via-surface to-transparent pt-8">
+<div class="max-w-3xl mx-auto bg-surface-container rounded-2xl p-2 shadow-lg border border-outline-variant flex items-center gap-2">
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+</button>
+<input class="flex-grow bg-transparent border-none focus:ring-0 text-[16px] text-on-surface placeholder:text-on-surface-variant px-2" placeholder="Type your money q's here..." type="text"/>
+<button class="w-12 h-12 rounded-xl bg-primary text-on-primary flex items-center justify-center active:scale-90 transition-transform duration-150 shadow-md" id="send-btn">
+<span class="material-symbols-outlined" data-icon="send" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</div>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface-container dark:bg-surface-dim shadow-[0px_-4px_20px_rgba(0,0,0,0.04)] rounded-t-xl flex justify-around items-center px-4 pb-4 pt-2">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-1 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-[12px]">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-1 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="trophy">trophy</span>
+<span class="font-label-sm text-[12px]">Challenges</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 active:scale-90 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="forum" style="font-variation-settings: 'FILL' 1;">forum</span>
+<span class="font-label-sm text-[12px] font-bold">Friends</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-1 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="bar_chart">bar_chart</span>
+<span class="font-label-sm text-[12px]">Analytics</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors px-4 py-1 rounded-full" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-[12px]">Settings</span>
+</a>
+</nav>
+<script>
+        function sendQuickMsg(text) {
+            const container = document.getElementById('chat-container');
+            
+            // User Message
+            const userMsg = document.createElement('div');
+            userMsg.className = "flex flex-row-reverse items-start gap-3 max-w-[85%] self-end animate-in fade-in slide-in-from-right-4 duration-300";
+            userMsg.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-on-surface-variant text-[18px]" style="font-variation-settings: 'FILL' 1;">person</span>
+                </div>
+                <div class="chat-bubble-user bg-surface-container-high text-on-surface p-4 rounded-xl shadow-sm border border-outline-variant">
+                    <p class="text-[16px] leading-relaxed">${text}</p>
+                </div>
+            `;
+            container.appendChild(userMsg);
+            
+            // Simulated Bot Typing
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = "flex items-start gap-3 max-w-[85%] animate-in fade-in slide-in-from-left-4 duration-300";
+                botMsg.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-on-primary text-[18px]" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+                    </div>
+                    <div class="chat-bubble-bot bg-primary-container text-on-primary-container p-4 rounded-xl shadow-sm">
+                        <p class="text-[16px] leading-relaxed">Ooooh good choice! 💎 Lemme crunch the numbers for you real quick...</p>
+                    </div>
+                `;
+                container.appendChild(botMsg);
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }, 800);
+
+            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+        }
+
+        document.getElementById('send-btn').addEventListener('click', () => {
+            const input = document.querySelector('input');
+            if(input.value.trim() !== "") {
+                sendQuickMsg(input.value);
+                input.value = "";
+            }
+        });
+    </script>
+</body></html>
