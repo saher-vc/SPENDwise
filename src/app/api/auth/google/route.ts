@@ -1,35 +1,38 @@
-import { prisma } from '@/lib/prisma'
-import { setSession } from '@/lib/session'
-import { NextResponse } from 'next/server'
-import { auth } from '@/auth'
-
 export const dynamic = 'force-dynamic'
+
+import { NextResponse } from 'next/server'
 
 export async function GET() {
   try {
+    const { auth } = await import('@/auth')
     const session = await auth()
 
+    const baseUrl = process.env.NEXTAUTH_URL ?? 'http://localhost:3000'
+
     if (!session?.user?.email) {
-      return NextResponse.redirect(new URL('/login', process.env.NEXTAUTH_URL ?? 'http://localhost:3000'))
+      return NextResponse.redirect(new URL('/login', baseUrl))
     }
 
+    const { prisma } = await import('@/lib/prisma')
     const user = await prisma.user.findUnique({
       where: { email: session.user.email },
     })
 
     if (!user) {
-      return NextResponse.redirect(new URL('/login', process.env.NEXTAUTH_URL ?? 'http://localhost:3000'))
+      return NextResponse.redirect(new URL('/login', baseUrl))
     }
 
+    const { setSession } = await import('@/lib/session')
     await setSession(user.id)
 
     if (!user.onboarded) {
-      return NextResponse.redirect(new URL('/onboarding', process.env.NEXTAUTH_URL ?? 'http://localhost:3000'))
+      return NextResponse.redirect(new URL('/onboarding', baseUrl))
     }
 
-    return NextResponse.redirect(new URL('/dashboard', process.env.NEXTAUTH_URL ?? 'http://localhost:3000'))
+    return NextResponse.redirect(new URL('/dashboard', baseUrl))
   } catch (err) {
     console.error('Google auth callback error:', err)
-    return NextResponse.redirect(new URL('/login', process.env.NEXTAUTH_URL ?? 'http://localhost:3000'))
+    const baseUrl = process.env.NEXTAUTH_URL ?? 'http://localhost:3000'
+    return NextResponse.redirect(new URL('/login', baseUrl))
   }
 }
