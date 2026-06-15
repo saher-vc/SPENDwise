@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { prisma } from '@/lib/prisma'
 import { setSession } from '@/lib/session'
 import { validateEmail, validatePassword, validateName } from '@/lib/validation'

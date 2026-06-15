@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { clearSession } from '@/lib/session'
 import { NextResponse } from 'next/server'
 
