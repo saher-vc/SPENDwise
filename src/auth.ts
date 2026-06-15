@@ -44,12 +44,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
     async session({ session }) {
       if (session.user?.email) {
-        const dbUser = await prisma.user.findUnique({
-          where: { email: session.user.email },
-        })
-        if (dbUser) {
-          (session.user as any).id = dbUser.id;
-          (session.user as any).onboarded = dbUser.onboarded;
+        try {
+          const dbUser = await prisma.user.findUnique({
+            where: { email: session.user.email },
+          })
+          if (dbUser) {
+            (session.user as any).id = dbUser.id;
+            (session.user as any).onboarded = dbUser.onboarded;
+          }
+        } catch (err) {
+          console.error('Session callback error:', err)
         }
       }
       return session
@@ -59,4 +63,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   pages: {
     signIn: '/login',
   },
+
+  trustHost: true,
 })
